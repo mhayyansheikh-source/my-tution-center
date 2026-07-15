@@ -1,0 +1,109 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/HeroSection.astro';
+import CourseCard from '../components/CourseCard.astro';
+import TutorCard from '../components/TutorCard.astro';
+import { getCourses, getTutors } from '../lib/api';
+
+// Fetch data from WP at build time (SSG)
+const courses = await getCourses();
+const tutors = await getTutors();
+
+// Get the first 6 courses for the homepage
+const featuredCourses = courses.slice(0, 6);
+---
+
+<Layout title="My Tuition Center – Best Online Courses & Expert Tutors in Karachi">
+	<main id="page-home" class="page active">
+		<HeroSection />
+
+		<!-- COURSE SEARCH -->
+		<section style="padding:0 0 var(--sp-section)">
+			<div class="container">
+				<div class="search-bar-wrap">
+					<h2>Find the Perfect Course</h2>
+					<div class="search-bar">
+						<input type="text" placeholder="Search by subject, topic, or keyword…" />
+						<select>
+							<option>All Grades</option>
+							<option>Primary (1–6)</option>
+							<option>Lower Secondary (7–9)</option>
+							<option>Upper Secondary (10–12)</option>
+							<option>A-Level / Pre-University</option>
+						</select>
+						<a href="/courses" class="btn btn-primary" style="display:flex;align-items:center;">Search</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- LOGO STRIP -->
+		<section style="padding:0 0 var(--sp-section)">
+			<div class="container">
+				<div class="logo-strip">
+					<p>Trusted by students from leading institutions in Karachi</p>
+					<div class="logo-strip-row">
+						<span class="logo-strip-item">KARACHI GRAMMAR SCHOOL</span>
+						<span class="logo-strip-item">THE CITY SCHOOL</span>
+						<span class="logo-strip-item">NIXOR COLLEGE</span>
+						<span class="logo-strip-item">BEACONHOUSE</span>
+						<span class="logo-strip-item">CEDAR COLLEGE</span>
+						<span class="logo-strip-item">AGA KHAN UNIVERSITY</span>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- FEATURED COURSES -->
+		<section class="section-pad" style="padding-top:0">
+			<div class="container">
+				<div class="section-header centered">
+					<h2 class="display-md">Explore Our Top-Rated Programs</h2>
+					<p>From foundational skills to advanced academic subjects, we have a course for every learner.</p>
+				</div>
+				<div class="course-grid">
+					{featuredCourses.length > 0 ? (
+						featuredCourses.map(course => <CourseCard course={course} />)
+					) : (
+						<p>No courses found. Ensure WordPress backend is running and courses are added.</p>
+					)}
+				</div>
+				<div style="text-align:center;margin-top:var(--sp-xxl)">
+					<a href="/courses" class="btn btn-secondary">View All Courses →</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- SIG CORAL CARD -->
+		<section style="padding:0 0 var(--sp-section)">
+			<div class="container">
+				<div class="sig-coral-card">
+					<div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-xxl);align-items:center">
+						<div>
+							<h2>Production-grade learning, from day one</h2>
+							<p>Our curriculum is designed with academic rigour and real-world application. Every course is crafted by subject specialists with decades of teaching experience.</p>
+							<a href="/courses" class="btn btn-secondary-on-dark">Browse Curriculum</a>
+						</div>
+						<div>
+							<img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=700&q=80" alt="Students studying with quality materials" style="width:100%;height:280px;object-fit:cover;border-radius:var(--r-md);opacity:.85" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<!-- STATS BAND -->
+		<section style="padding:0 0 var(--sp-section)">
+			<div class="container">
+				<div class="stats-band">
+					<div class="stats-grid">
+						<div class="stat-item"><div class="val">5,000+</div><div class="lbl">Active Students</div></div>
+						<div class="stat-item"><div class="val">98%</div><div class="lbl">Pass Rate</div></div>
+						<div class="stat-item"><div class="val">120+</div><div class="lbl">Expert Tutors</div></div>
+						<div class="stat-item"><div class="val">15+</div><div class="lbl">Years of Excellence</div></div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>

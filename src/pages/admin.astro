@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Admin Login - My Tuition Center">
+  <main id="page-admin" class="page">
+    <div class="admin-page">
+      <div class="admin-card">
+        <div class="admin-logo">
+          <div class="admin-logo-mark">G</div>
+          <div>
+            <div class="admin-logo-text">My Tuition Center</div>
+            <div style="font-size: 14px;color:rgba(255,255,255,.4)">Administration System</div>
+          </div>
+        </div>
+        <div class="admin-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          Secure Admin Access
+        </div>
+        <h1 class="admin-title">Administrator Login</h1>
+        <p class="admin-subtitle">Authorised personnel only. All access is logged and monitored.</p>
+        <form id="admin-form">
+          <div class="admin-form-group"><label>Username or Email</label><input class="admin-form-control" type="text" placeholder="admin@mytuition-center.com" required /></div>
+          <div class="admin-form-group"><label>Password</label><input class="admin-form-control" type="password" placeholder="Enter secure password" required /></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:var(--sp-sm)">
+            <label class="admin-check"><input type="checkbox"> Remember this device</label>
+            <a style="font-size:13px;color:rgba(255,255,255,.4);text-decoration:underline;cursor:pointer" onclick="alert('Secure recovery email sent')">Recover Access</a>
+          </div>
+          <button type="submit" class="admin-btn">Sign In to Dashboard</button>
+        </form>
+        <div class="admin-footer-link"><a href="/">← Return to main site</a></div>
+        <div class="admin-security-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" opacity=".4"><path d="M12 1L3 5v6c0 5.55 3.84 74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+          Protected by 256-bit SSL encryption. Session expires after 30 minutes of inactivity.
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const adminForm = document.getElementById('admin-form');
+  if (adminForm) {
+    adminForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('✓ Admin authenticated. Loading admin panel…');
+    });
+  }
+</script>

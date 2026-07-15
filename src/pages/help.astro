@@ -1,0 +1,102 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Help Center - My Tuition Center">
+  <main id="page-help" class="page">
+    <!-- HERO -->
+    <section style="background:var(--color-canvas);padding:var(--sp-section) 0 var(--sp-xxl);">
+      <div class="container" style="text-align:center;">
+        <h1 class="display-lg" style="margin-bottom:var(--sp-md);">How can we help you?</h1>
+        <p style="font-size:16px;color:var(--color-body);max-width:520px;margin:0 auto var(--sp-xl);">Search our knowledge base or browse topics below to find answers fast.</p>
+        <!-- Search -->
+        <div class="help-search-bar">
+          <input id="help-search-input" class="form-control" type="text" placeholder="Search articles, FAQs, topics…" />
+          <button class="btn btn-primary" onclick="alert('Search functionality coming soon')">Search</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORY CARDS -->
+    <section style="background:var(--color-canvas);padding:0 0 var(--sp-section);">
+      <div class="container">
+        <div class="help-category-grid">
+          <div class="help-cat-card" style="background:var(--color-sig-peach);" onclick="alert('Category: Getting Started')">
+            <div class="help-cat-icon">🚀</div>
+            <h2>Getting Started</h2>
+            <p>Account setup, enrollment, first steps</p>
+            <span class="help-cat-count">12 articles</span>
+          </div>
+          <div class="help-cat-card" style="background:var(--color-sig-mint);" onclick="alert('Category: Courses & Learning')">
+            <div class="help-cat-icon">📚</div>
+            <h3>Courses & Learning</h3>
+            <p>Accessing content, progress tracking, certificates</p>
+            <span class="help-cat-count">18 articles</span>
+          </div>
+          <div class="help-cat-card" style="background:var(--color-sig-yellow);" onclick="alert('Category: Billing & Payments')">
+            <div class="help-cat-icon">💳</div>
+            <h3>Billing & Payments</h3>
+            <p>Invoices, refunds, subscription plans</p>
+            <span class="help-cat-count">9 articles</span>
+          </div>
+          <div class="help-cat-card" style="background:var(--color-sig-cream);" onclick="alert('Category: Working with Tutors')">
+            <div class="help-cat-icon">👩‍🏫</div>
+            <h3>Working with Tutors</h3>
+            <p>Scheduling sessions, feedback, changing tutors</p>
+            <span class="help-cat-count">14 articles</span>
+          </div>
+          <div class="help-cat-card" style="background:#f8fafc;" onclick="alert('Category: Technical Issues')">
+            <div class="help-cat-icon">🔧</div>
+            <h3>Technical Issues</h3>
+            <p>Video, audio, login, browser compatibility</p>
+            <span class="help-cat-count">11 articles</span>
+          </div>
+          <div class="help-cat-card" style="background:#fcab79;" onclick="alert('Category: Account & Profile')">
+            <div class="help-cat-icon">👤</div>
+            <h3>Account & Profile</h3>
+            <p>Password, notifications, privacy settings</p>
+            <span class="help-cat-count">7 articles</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POPULAR ARTICLES -->
+    <section style="background:var(--color-surface-soft);padding:var(--sp-section) 0;">
+      <div class="container">
+        <div class="section-header centered">
+          <h2 class="display-md">Most helpful resources</h2>
+        </div>
+        <div id="help-articles-list" class="help-articles-grid">
+          <div class="help-article-card" style="padding:var(--sp-lg);background:#fff;border-radius:var(--r-md);box-shadow:0 1px 3px rgba(0,0,0,.05);">
+            <h4 style="margin-bottom:var(--sp-xs);">How do I reset my password?</h4>
+            <p style="font-size:14px;color:var(--color-muted);">Learn how to securely recover access to your account if you've forgotten your login details.</p>
+          </div>
+          <div class="help-article-card" style="padding:var(--sp-lg);background:#fff;border-radius:var(--r-md);box-shadow:0 1px 3px rgba(0,0,0,.05);">
+            <h4 style="margin-bottom:var(--sp-xs);">How to enroll in a new course</h4>
+            <p style="font-size:14px;color:var(--color-muted);">Step-by-step guide to finding and enrolling in the right course for your grade level.</p>
+          </div>
+          <div class="help-article-card" style="padding:var(--sp-lg);background:#fff;border-radius:var(--r-md);box-shadow:0 1px 3px rgba(0,0,0,.05);">
+            <h4 style="margin-bottom:var(--sp-xs);">Updating your payment method</h4>
+            <p style="font-size:14px;color:var(--color-muted);">How to add a new credit card or switch to bank transfer for your monthly tuition fees.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORAL CTA BAND -->
+    <section class="sig-coral-band">
+      <div class="container">
+        <div class="sig-card-inner" style="text-align:center;">
+          <p class="sig-eyebrow" style="color:rgba(255,255,255,.65);">Still need help?</p>
+          <h2 class="display-md" style="color:#fff;margin-bottom:var(--sp-md);">Our team responds within 2 hours</h2>
+          <p style="color:rgba(255,255,255,.8);font-size:16px;max-width:480px;margin:0 auto var(--sp-xl);">Send us a message and a real person, not a bot, will get back to you promptly.</p>
+          <div style="display:flex;gap:var(--sp-md);justify-content:center;flex-wrap:wrap;">
+            <a href="/contact" class="btn btn-secondary-on-dark">Contact Support</a>
+            <a href="mailto:mutuitioncenter01@gmail.com" class="btn" style="background:transparent;color:rgba(255,255,255,.8);border:1.5px solid rgba(255,255,255,.35);">Email Us Directly</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getTutors } from '../../lib/api';
+
+export async function getStaticPaths() {
+  const tutors = await getTutors();
+  
+  return tutors.map((tutor) => {
+    return {
+      params: { slug: tutor.slug },
+      props: { tutor },
+    };
+  });
+}
+
+const { tutor } = Astro.props;
+
+// Safe fallbacks for data
+const name = tutor?.title?.rendered || tutor?.name || 'Expert Tutor';
+const subject = tutor?.meta?.subject || 'Specialized Subject';
+const description = tutor?.content?.rendered || tutor?.description || 'Tutor description not available.';
+const image = tutor?._embedded?.['wp:featuredmedia']?.[0]?.source_url || tutor?.image || 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80';
+const badges = tutor?.meta?.badges || ['A-Level', 'O-Level', 'Expert'];
+---
+
+<Layout title={`${name} - Tutor Profile`}>
+  <main class="page">
+    <div class="container" style="padding-top: var(--sp-xxl); padding-bottom: var(--sp-xxl);">
+      <div style="display:flex; gap: var(--sp-xxl); flex-wrap: wrap; align-items: flex-start;">
+        
+        <!-- Left: Image & Quick Stats -->
+        <div style="width: 320px; flex-shrink: 0;">
+          <img src={image} alt={name} style="width: 100%; border-radius: var(--r-md); margin-bottom: var(--sp-md); box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+          
+          <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--r-md); padding: var(--sp-lg);">
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: var(--sp-xs);">Quick Facts</h3>
+            <ul style="list-style:none; padding:0; margin:0; font-size:14px; color:var(--color-body); line-height:2;">
+              <li><strong>Rating:</strong> ★ 4.9 (312 reviews)</li>
+              <li><strong>Students Taught:</strong> 500+</li>
+              <li><strong>Response Time:</strong> Within 2 hours</li>
+              <li><strong>Availability:</strong> Mon - Sat</li>
+            </ul>
+            <a href="/trial" class="btn btn-primary" style="width:100%; display:block; text-align:center; margin-top: var(--sp-md);">Book a Trial</a>
+          </div>
+        </div>
+
+        <!-- Right: Details -->
+        <div style="flex: 1; min-width: 300px;">
+          <h1 class="display-md" style="margin-bottom: var(--sp-xs);" set:html={name}></h1>
+          <div style="font-size: 18px; color: var(--color-primary); font-weight: 500; margin-bottom: var(--sp-md);">{subject}</div>
+          
+          <div class="badge-row" style="margin-bottom: var(--sp-lg);">
+            {badges.map((badge) => (
+              <span class="badge">{badge}</span>
+            ))}
+          </div>
+          
+          <div style="background:var(--color-surface); padding:var(--sp-lg); border-radius:var(--r-md); margin-bottom: var(--sp-xl);">
+            <h2 style="margin-bottom: var(--sp-sm);">About {name}</h2>
+            <div style="color:var(--color-body); line-height:1.7;" set:html={description}></div>
+          </div>
+          
+          <h2 style="margin-bottom: var(--sp-sm);">Teaching Methodology</h2>
+          <p style="color:var(--color-body); line-height:1.7; margin-bottom: var(--sp-lg);">
+            My teaching philosophy revolves around conceptual clarity and practical application. Instead of rote memorization, I encourage students to ask "why" and "how". Through continuous assessment and targeted practice, I ensure that my students not only score well in exams but also develop a genuine interest in the subject matter.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</Layout>

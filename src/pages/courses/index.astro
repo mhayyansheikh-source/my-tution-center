@@ -1,0 +1,106 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CourseCard from '../../components/CourseCard.astro';
+import { getCourses } from '../../lib/api';
+
+const courses = await getCourses();
+---
+
+<Layout title="All Courses - My Tuition Center">
+  <main id="page-courses" class="page">
+    <section class="courses-header">
+      <div class="container">
+        <h1 class="display-lg" style="margin-bottom:var(--sp-md)">All Courses & Programs</h1>
+        <p style="font-size:16px;color:var(--color-body);max-width:560px;margin-bottom:var(--sp-xxl)">Browse our full curriculum across every subject and grade level. Filter by what matters to you and enroll in minutes.</p>
+        <div class="filter-bar">
+          <button class="filter-pill active" data-subject="all">All Subjects</button>
+          <button class="filter-pill" data-subject="mathematics">Mathematics</button>
+          <button class="filter-pill" data-subject="sciences">Sciences</button>
+          <button class="filter-pill" data-subject="english">English</button>
+          <button class="filter-pill" data-subject="computing">Computing</button>
+          <button class="filter-pill" data-subject="humanities">Humanities</button>
+          <select class="filter-select" id="grade-filter">
+            <option value="">All Grade Levels</option>
+            <option value="primary">Primary (1–6)</option>
+            <option value="lower">Lower Secondary (7–9)</option>
+            <option value="upper">Upper Secondary (10–12)</option>
+            <option value="alevel">A-Level / Pre-University</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad">
+      <div class="container">
+        <div class="course-grid" id="courses-grid">
+          {courses.length > 0 ? (
+            courses.map(course => <CourseCard course={course} />)
+          ) : (
+            <p>No courses found. Ensure WordPress backend is running and courses are added.</p>
+          )}
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  let activeSubject = 'all';
+  let activeGrade = '';
+
+  const pills = document.querySelectorAll('.filter-pill');
+  const select = document.getElementById('grade-filter');
+  const cards = document.querySelectorAll('.course-card');
+
+  function applyFilters() {
+    let visibleCount = 0;
+    cards.forEach(card => {
+      const subj = card.getAttribute('data-subject');
+      const grade = card.getAttribute('data-grade');
+      
+      const subjMatch = activeSubject === 'all' || subj.includes(activeSubject);
+      const gradeMatch = !activeGrade || grade === activeGrade;
+      
+      if (subjMatch && gradeMatch) {
+        card.style.display = '';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Handle no results message
+    const grid = document.getElementById('courses-grid');
+    let noResultsMsg = document.getElementById('no-results-msg');
+    
+    if (visibleCount === 0 && cards.length > 0) {
+      if (!noResultsMsg) {
+        noResultsMsg = document.createElement('p');
+        noResultsMsg.id = 'no-results-msg';
+        noResultsMsg.style.gridColumn = '1 / -1';
+        noResultsMsg.style.textAlign = 'center';
+        noResultsMsg.textContent = 'No courses match your filters. Try broadening your search.';
+        grid.appendChild(noResultsMsg);
+      }
+      noResultsMsg.style.display = 'block';
+    } else if (noResultsMsg) {
+      noResultsMsg.style.display = 'none';
+    }
+  }
+
+  pills.forEach(btn => {
+    btn.addEventListener('click', () => {
+      pills.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeSubject = btn.getAttribute('data-subject') || 'all';
+      applyFilters();
+    });
+  });
+
+  if (select) {
+    select.addEventListener('change', (e) => {
+      activeGrade = (e.target as HTMLSelectElement).value;
+      applyFilters();
+    });
+  }
+</script>

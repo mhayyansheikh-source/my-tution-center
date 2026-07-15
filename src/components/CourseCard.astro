@@ -1,0 +1,39 @@
+---
+// CourseCard Component
+const { course } = Astro.props;
+
+// Default fallbacks for testing before API connection
+const title = course?.title?.rendered || course?.title || 'Default Course Title';
+const description = course?.excerpt?.rendered || course?.description || 'Learn the core concepts and excel in your exams.';
+const image = course?._embedded?.['wp:featuredmedia']?.[0]?.source_url || course?.image || 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&q=80';
+const price = course?.meta?.price || 'PKR 15,000/mo';
+const tutorName = course?._embedded?.author?.[0]?.name || 'Expert Tutor';
+const tag = course?.meta?.subject_tag || 'Education';
+const grade = course?.meta?.grade || 'upper'; // default fallback for grade
+const dataSubject = tag.toLowerCase();
+---
+<div class="course-card" data-subject={dataSubject} data-grade={grade}>
+  <img class="course-card-img" src={image} alt={title} />
+  <div class="course-card-body">
+    <span class="course-tag">{tag}</span>
+    <h3 set:html={title}></h3>
+    <p set:html={description}></p>
+    
+    <div class="course-meta">
+      <div class="course-tutor">
+        <!-- Placeholder avatar until WP user avatars are mapped -->
+        <img class="course-tutor-avatar" src="https://ui-avatars.com/api/?name=Tutor&background=random" alt={tutorName} />
+        <span>{tutorName}</span>
+      </div>
+      <div>
+        <div class="course-rating"><span class="star">★</span> 4.9</div>
+        <div class="course-price">{price}</div>
+      </div>
+    </div>
+    
+    <div style="margin-top:16px;display:flex;gap:8px">
+      <a href="/auth" class="btn btn-primary btn-sm" style="flex:1; text-align:center;">Enroll Now</a>
+      <a href={`/courses/${course?.slug || '#'}`} class="btn btn-secondary btn-sm" style="text-align:center;">Details</a>
+    </div>
+  </div>
+</div>

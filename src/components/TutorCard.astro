@@ -1,0 +1,30 @@
+---
+// TutorCard Component
+const { tutor } = Astro.props;
+
+// Default fallbacks for testing before API connection
+const name = tutor?.title?.rendered || tutor?.name || 'Dr. Salman Ahmad';
+const subject = tutor?.meta?.subject || 'Advanced Mathematics & Statistics';
+const description = tutor?.excerpt?.rendered || tutor?.description || 'PhD in Applied Mathematics from NED University. 12 years teaching CAIE O/A-Level and ECAT university preparation.';
+const image = tutor?._embedded?.['wp:featuredmedia']?.[0]?.source_url || tutor?.image || 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80';
+const badges = tutor?.meta?.badges || ['A-Level', 'O-Level Math', 'ECAT'];
+---
+<div class="tutor-card">
+  <img class="tutor-card-img" src={image} alt={name} />
+  <div class="tutor-card-body">
+    <h3 set:html={name}></h3>
+    <div class="subject">{subject}</div>
+    <p set:html={description}></p>
+    
+    <div class="badge-row">
+      {badges.map((badge) => (
+        <span class="badge">{badge}</span>
+      ))}
+    </div>
+    
+    <div class="tutor-card-footer" style="margin-top:var(--sp-md)">
+      <div class="rating"><span class="star">★</span> 4.9 (312 reviews)</div>
+      <a href={`/tutors/${tutor?.slug || '#'}`} class="btn btn-secondary btn-sm" style="text-align:center;">View Profile</a>
+    </div>
+  </div>
+</div>

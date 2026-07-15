@@ -1,0 +1,81 @@
+---
+// Header Component
+---
+<!-- ANNOUNCEMENT BAR -->
+<div class="nav-announce-bar visible" id="announce-bar" role="banner">
+  <span>🎓</span>
+  <span>New course starting <strong>August 2026</strong> , limited seats.</span>
+  <a href="/auth">Enroll free →</a>
+  <button class="announce-close" onclick="document.getElementById('announce-bar').classList.remove('visible')" aria-label="Close announcement">×</button>
+</div>
+
+<!-- STICKY HEADER -->
+<header id="site-header" role="banner">
+  <div class="container">
+    <nav class="nav-inner" role="navigation" aria-label="Main navigation">
+
+      <!-- LOGO -->
+      <a href="/" class="nav-logo" role="link" tabindex="0" aria-label="My Tuition Center, home">
+        <div class="nav-logo-mark" aria-hidden="true">M</div>
+        <div>
+          <div class="nav-logo-text">My Tuition Center</div>
+          <div class="nav-logo-sub">Garden West, Karachi</div>
+        </div>
+      </a>
+
+      <!-- DESKTOP LINKS -->
+      <div class="nav-links" role="list">
+        <a href="/" id="nav-home" role="listitem" tabindex="0">Home</a>
+        <a href="/about" id="nav-about" role="listitem" tabindex="0">About Us</a>
+        <a href="/courses" id="nav-courses" role="listitem" tabindex="0">Courses</a>
+        <a href="/tutors" id="nav-tutors" role="listitem" tabindex="0">Our Tutors</a>
+        <a href="/contact" id="nav-contact" role="listitem" tabindex="0">Contact</a>
+      </div>
+
+      <!-- DESKTOP CTAs -->
+      <div class="nav-ctas">
+        <a href="/auth" class="btn btn-secondary" aria-label="Student login">Student Login</a>
+        <a href="/auth?role=tutor" class="btn btn-primary" aria-label="Tutor login">Tutor Login</a>
+      </div>
+
+      <!-- HAMBURGER -->
+      <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+
+    </nav>
+  </div>
+</header>
+
+<!-- MOBILE DRAWER -->
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+  <a href="/">Home</a>
+  <a href="/about">About Us</a>
+  <a href="/courses">Courses</a>
+  <a href="/tutors">Our Tutors</a>
+  <a href="/help">Help Center</a>
+  <a href="/trial">Book a Trial</a>
+  <a href="/contact">Contact</a>
+  <div class="mobile-ctas">
+    <a href="/auth" class="btn btn-secondary">Student Login</a>
+    <a href="/auth?role=tutor" class="btn btn-primary">🎓 &nbsp;Tutor Login</a>
+  </div>
+  <div class="mobile-contact-strip">
+    <span>📞 +92 370 3438352</span>
+    <span>✉️ mutuitioncenter01@gmail.com</span>
+  </div>
+</nav>
+
+<script>
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const hamburger = document.getElementById('hamburger');
+    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', !isExpanded);
+    if (!isExpanded) {
+      menu.classList.add('active');
+    } else {
+      menu.classList.remove('active');
+    }
+  }
+</script>

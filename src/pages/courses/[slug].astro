@@ -1,0 +1,67 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCourses } from '../../lib/api';
+
+export async function getStaticPaths() {
+  const courses = await getCourses();
+  
+  return courses.map((course) => {
+    return {
+      params: { slug: course.slug },
+      props: { course },
+    };
+  });
+}
+
+const { course } = Astro.props;
+
+// Safe fallbacks for data
+const title = course?.title?.rendered || course?.title || 'Course Title';
+const desc = course?.content?.rendered || course?.description || 'Course description not available.';
+const tag = course?.meta?.tag || 'Course';
+const tutorName = course?.meta?.tutor_name || 'Expert Tutor';
+const rating = course?.meta?.rating || '★★★★★';
+const price = course?.meta?.price || 'PKR 15,000 / month';
+const format = course?.meta?.format || 'Online via Zoom';
+---
+
+<Layout title={`${title} - My Tuition Center`}>
+  <main id="page-course-details" class="page">
+    <div class="container" style="padding-top: var(--sp-xxl); padding-bottom: var(--sp-xxl);">
+      <div style="display:flex; gap: var(--sp-lg); flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 300px;">
+          <span class="course-tag">{tag}</span>
+          <h1 class="display-md" style="margin: var(--sp-sm) 0;" set:html={title}></h1>
+          <div style="font-size: 18px; color: var(--color-body); margin-bottom: var(--sp-lg);" set:html={desc}></div>
+          
+          <div style="display:flex; align-items:center; gap: var(--sp-sm); margin-bottom: var(--sp-xl);">
+            <div>
+              <div style="font-weight:600;">{tutorName}</div>
+              <div style="color:var(--color-muted);font-size:14px;">{rating}</div>
+            </div>
+          </div>
+          
+          <div style="background:var(--color-surface); padding:var(--sp-lg); border-radius:var(--r-md);">
+            <h2>Course Overview</h2>
+            <ul style="margin-top:var(--sp-sm); color:var(--color-body); line-height:1.6; padding-left:20px;">
+              <li>Comprehensive syllabus coverage</li>
+              <li>Weekly interactive live sessions</li>
+              <li>24/7 access to recorded lectures</li>
+              <li>Dedicated WhatsApp support group</li>
+              <li>Mock exams and assignments</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div style="width: 320px; flex-shrink: 0;">
+          <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--r-md); padding: var(--sp-lg); position: sticky; top: 100px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+            <div style="font-size:32px; font-weight:700; color:var(--color-ink); margin-bottom:var(--sp-xs);">{price}</div>
+            <div style="color:var(--color-muted); font-size:14px; margin-bottom:var(--sp-lg);">{format}</div>
+            
+            <a href={`/enroll?course=${encodeURIComponent(title)}&price=${encodeURIComponent(price)}&tutor=${encodeURIComponent(tutorName)}&format=${encodeURIComponent(format)}`} class="btn btn-primary" style="width:100%; display:block; text-align:center; height:auto; padding:12px;">Enroll Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

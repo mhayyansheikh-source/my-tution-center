@@ -1,0 +1,125 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Book a Free Trial - My Tuition Center">
+  <main id="page-trial" class="page">
+    <!-- HERO SPLIT -->
+    <section style="background:var(--color-canvas);padding:var(--sp-section) 0;">
+      <div class="container">
+        <div class="trial-split">
+
+          <!-- LEFT , Value prop -->
+          <div class="trial-left">
+            <h1 class="display-lg" style="margin-bottom:var(--sp-md);">Experience the My Tuition Center difference, free</h1>
+            <p style="font-size:16px;color:var(--color-body);line-height:1.7;margin-bottom:var(--sp-xl);">Book a 60-minute live session with one of our expert tutors. No credit card. No commitment. Just great teaching.</p>
+
+            <div class="trial-benefits">
+              <div class="trial-benefit-item">
+                <div class="trial-benefit-icon" style="background:#a8d8c4;">✅</div>
+                <div><strong>Personalised assessment</strong><p>Your tutor evaluates your level and learning style on the spot.</p></div>
+              </div>
+              <div class="trial-benefit-item">
+                <div class="trial-benefit-icon" style="background:#f4d35e;">🎯</div>
+                <div><strong>Custom study plan</strong><p>Walk away with a tailored roadmap designed just for you.</p></div>
+              </div>
+              <div class="trial-benefit-item">
+                <div class="trial-benefit-icon" style="background:#f8fafc;">📅</div>
+                <div><strong>Flexible scheduling</strong><p>Morning, afternoon, or evening , you pick what suits you best.</p></div>
+              </div>
+              <div class="trial-benefit-item">
+                <div class="trial-benefit-icon" style="background:#fcab79;">💬</div>
+                <div><strong>Zero pressure</strong><p>No sales pitch. Decide to enroll only if you love the session.</p></div>
+              </div>
+            </div>
+
+            <!-- Social proof avatars -->
+            <div class="trial-social-proof">
+              <div class="avatar-stack">
+                <div class="avatar-bubble" style="background:#aa2d00;">A</div>
+                <div class="avatar-bubble" style="background:#0a2e0e;">S</div>
+                <div class="avatar-bubble" style="background:#181d26;">R</div>
+                <div class="avatar-bubble" style="background:#d9a441;">M</div>
+              </div>
+              <span style="font-size:14px;color:var(--color-body);">Join <strong>2,400+</strong> students who started with a free trial</span>
+            </div>
+          </div>
+
+          <!-- RIGHT , Booking form -->
+          <div class="trial-right">
+            <div class="trial-form-card">
+              <h2 style="font-size: 24px;font-weight:600;color:var(--color-ink);margin-bottom:var(--sp-xs);">Book your free session</h2>
+              <p style="font-size:14px;color:var(--color-muted);margin-bottom:var(--sp-xl);">Takes less than 2 minutes. We'll confirm within 1 hour.</p>
+              <form id="trial-form" novalidate>
+                <div class="form-row-2">
+                  <div class="form-group"><label>First Name <span style="color:#aa2d00;">*</span></label><input class="form-control" type="text" placeholder="Sara" required /></div>
+                  <div class="form-group"><label>Last Name <span style="color:#aa2d00;">*</span></label><input class="form-control" type="text" placeholder="Khan" required /></div>
+                </div>
+                <div class="form-group"><label>Email Address <span style="color:#aa2d00;">*</span></label><input class="form-control" type="email" placeholder="sara@example.com" required /></div>
+                <div class="form-group"><label>Phone Number <span style="color:#aa2d00;">*</span></label><input class="form-control" type="tel" placeholder="+92 300 0000000" required /></div>
+                <div class="form-group">
+                  <label>Subject / Grade Level <span style="color:#aa2d00;">*</span></label>
+                  <select class="form-control" required>
+                    <option value="">Select a subject…</option>
+                    <optgroup label="Sciences"><option>Mathematics (O/A Level)</option><option>Physics</option><option>Chemistry</option><option>Biology</option></optgroup>
+                    <optgroup label="Languages"><option>English Language & Literature</option><option>Urdu</option></optgroup>
+                    <optgroup label="Computer Science"><option>Computer Science / IT</option></optgroup>
+                    <optgroup label="Other"><option>Economics</option><option>General Study Skills</option></optgroup>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Preferred Session Time</label>
+                  <select class="form-control">
+                    <option value="">Any time works</option>
+                    <option>Morning (8 AM – 12 PM)</option>
+                    <option>Afternoon (12 PM – 4 PM)</option>
+                    <option>Evening (4 PM – 8 PM)</option>
+                  </select>
+                </div>
+                <div class="form-group"><label>Anything else we should know?</label><textarea class="form-control" rows="3" placeholder="Current exam target, weak areas, special requirements…" style="resize:vertical;"></textarea></div>
+                <button type="submit" class="btn btn-primary" style="width:100%;height:52px;font-size:16px;margin-top:var(--sp-sm);">🎓 &nbsp;Book My Free Trial</button>
+                <p style="font-size: 14px;color:var(--color-muted);text-align:center;margin-top:var(--sp-sm);">By booking you agree to our <a href="/terms" style="color:var(--color-link);">Terms of Service</a> and <a href="/privacy" style="color:var(--color-link);">Privacy Policy</a>.</p>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FOREST STATS BAND -->
+    <section class="sig-forest-band">
+      <div class="container">
+        <div class="stats-row" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:var(--sp-xxl); padding:var(--sp-xxl) 0;">
+          <div class="stat-item" style="text-align:center;">
+            <div class="stat-number" style="color:#fff;">2,400+</div>
+            <div class="stat-label" style="color:rgba(255,255,255,.7);">Free trials booked</div>
+          </div>
+          <div class="stat-item" style="text-align:center;">
+            <div class="stat-number" style="color:#fff;">94%</div>
+            <div class="stat-label" style="color:rgba(255,255,255,.7);">Trial → enrollment rate</div>
+          </div>
+          <div class="stat-item" style="text-align:center;">
+            <div class="stat-number" style="color:#fff;">60 min</div>
+            <div class="stat-label" style="color:rgba(255,255,255,.7);">Full session, no cuts</div>
+          </div>
+          <div class="stat-item" style="text-align:center;">
+            <div class="stat-number" style="color:#fff;">PKR 0</div>
+            <div class="stat-label" style="color:rgba(255,255,255,.7);">Cost of your trial</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  const trialForm = document.getElementById('trial-form');
+  if (trialForm) {
+    trialForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('✓ Trial session booked successfully! We will contact you shortly to confirm the time.');
+      window.location.href = '/thank-you';
+    });
+  }
+</script>

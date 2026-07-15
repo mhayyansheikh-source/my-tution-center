@@ -1,0 +1,39 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TutorCard from '../../components/TutorCard.astro';
+import { getTutors } from '../../lib/api';
+
+const tutors = await getTutors();
+---
+
+<Layout title="Our Expert Tutors - My Tuition Center">
+  <main id="page-tutors" class="page">
+    <section class="tutor-page-hero">
+      <div class="container">
+        <div style="max-width:680px">
+          <h1 class="display-lg" style="margin-bottom:var(--sp-lg)">Learn from the best. Become the best.</h1>
+          <p style="font-size:16px;color:var(--color-body);line-height:1.6;margin-bottom:var(--sp-xxl)">Every Garden tutor holds an advanced degree in their subject, has passed our rigorous pedagogical training, and is committed to making your education exceptional.</p>
+          <div style="display:flex;gap:var(--sp-sm)">
+            <a href="/trial" class="btn btn-primary">Book a Trial Class</a>
+            <a href="/auth?role=tutor" class="btn btn-secondary">Tutor Portal</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" style="padding-top:0">
+      <div class="container">
+        <div class="section-header centered">
+          <h2 class="display-md">Meet our expert tutors</h2>
+        </div>
+        <div class="tutor-cards">
+          {tutors.length > 0 ? (
+            tutors.map(tutor => <TutorCard tutor={tutor} />)
+          ) : (
+            <p style="grid-column: 1 / -1; text-align: center;">No tutors found. Ensure WordPress backend is running and tutors are added.</p>
+          )}
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
