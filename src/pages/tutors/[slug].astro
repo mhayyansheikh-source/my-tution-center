@@ -20,7 +20,8 @@ const name = tutor?.title?.rendered || tutor?.name || 'Expert Tutor';
 const subject = tutor?.meta?.subject || 'Specialized Subject';
 const description = tutor?.content?.rendered || tutor?.description || 'Tutor description not available.';
 const image = tutor?._embedded?.['wp:featuredmedia']?.[0]?.source_url || tutor?.image || 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80';
-const badges = tutor?.meta?.badges || ['A-Level', 'O-Level', 'Expert'];
+const rawBadges = tutor?.meta?.badges;
+const badges = Array.isArray(rawBadges) ? rawBadges : (typeof rawBadges === 'string' ? rawBadges.split(',').map(b => b.trim()) : ['A-Level', 'O-Level', 'Expert']);
 ---
 
 <Layout title={`${name} - Tutor Profile`}>
