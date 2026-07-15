@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: My Tuition Center — Custom Post Types
- * Description: Registers Course and Tutor Profile CPTs with REST API support for the Astro frontend.
+ * Plugin Name: My Tuition Center — CPT & ACF Fields
+ * Description: Registers Course/Tutor CPTs, ACF field groups, and REST API meta for the Astro frontend.
  * Version: 1.0
  */
 
@@ -98,3 +98,36 @@ function mtc_prepare_tutor_response($response, $post) {
   return $response;
 }
 add_filter('rest_prepare_tutor_profile', 'mtc_prepare_tutor_response', 10, 2);
+
+// === ACF FIELD GROUPS (only if ACF is active) ===
+function mtc_register_acf_fields() {
+  if (!function_exists('acf_add_local_field_group')) return;
+
+  acf_add_local_field_group([
+    'key'      => 'group_mtc_course',
+    'title'    => 'Course Details',
+    'fields'   => [
+      ['key' => 'field_mtc_price', 'label' => 'Price', 'name' => 'price', 'type' => 'text', 'default_value' => 'PKR 15,000/mo'],
+      ['key' => 'field_mtc_subject_tag', 'label' => 'Subject Tag', 'name' => 'subject_tag', 'type' => 'text', 'default_value' => 'Education'],
+      ['key' => 'field_mtc_grade', 'label' => 'Grade Level', 'name' => 'grade', 'type' => 'select', 'choices' => ['primary' => 'Primary (1–6)', 'lower' => 'Lower Secondary (7–9)', 'upper' => 'Upper Secondary (10–12)', 'alevel' => 'A-Level / Pre-University'], 'default_value' => 'upper'],
+      ['key' => 'field_mtc_format', 'label' => 'Format', 'name' => 'format', 'type' => 'text', 'default_value' => 'Online via Zoom'],
+      ['key' => 'field_mtc_tutor_name', 'label' => 'Tutor Name', 'name' => 'tutor_name', 'type' => 'text', 'default_value' => 'Expert Tutor'],
+      ['key' => 'field_mtc_rating', 'label' => 'Rating', 'name' => 'rating', 'type' => 'text', 'default_value' => '★★★★★'],
+      ['key' => 'field_mtc_tag', 'label' => 'Tag', 'name' => 'tag', 'type' => 'text', 'default_value' => 'Course'],
+    ],
+    'location' => [[['param' => 'post_type', 'operator' => '==', 'value' => 'course']]],
+    'show_in_rest' => 1,
+  ]);
+
+  acf_add_local_field_group([
+    'key'      => 'group_mtc_tutor',
+    'title'    => 'Tutor Details',
+    'fields'   => [
+      ['key' => 'field_mtc_subject', 'label' => 'Subject', 'name' => 'subject', 'type' => 'text', 'default_value' => 'Specialized Subject'],
+      ['key' => 'field_mtc_badges', 'label' => 'Badges', 'name' => 'badges', 'type' => 'text', 'default_value' => 'A-Level,O-Level,Expert', 'instructions' => 'Comma-separated list of badges'],
+    ],
+    'location' => [[['param' => 'post_type', 'operator' => '==', 'value' => 'tutor_profile']]],
+    'show_in_rest' => 1,
+  ]);
+}
+add_action('init', 'mtc_register_acf_fields');

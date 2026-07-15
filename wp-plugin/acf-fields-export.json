@@ -1,0 +1,163 @@
+[
+  {
+    "key": "group_67d4c8f1a2b3c",
+    "title": "Course Details",
+    "fields": [
+      {
+        "key": "field_67d4c8f1b2c3d",
+        "label": "Price",
+        "name": "price",
+        "aria-label": "",
+        "type": "text",
+        "instructions": "e.g. PKR 15,000/mo",
+        "required": 0,
+        "default_value": "PKR 15,000/mo",
+        "placeholder": "",
+        "prepend": "",
+        "append": "",
+        "maxlength": ""
+      },
+      {
+        "key": "field_67d4c8f1c2d3e",
+        "label": "Subject Tag",
+        "name": "subject_tag",
+        "aria-label": "",
+        "type": "text",
+        "instructions": "e.g. Mathematics, Physics, English",
+        "required": 0,
+        "default_value": "Education",
+        "placeholder": ""
+      },
+      {
+        "key": "field_67d4c8f1d2e3f",
+        "label": "Grade Level",
+        "name": "grade",
+        "aria-label": "",
+        "type": "select",
+        "instructions": "",
+        "required": 0,
+        "choices": {
+          "primary": "Primary (1–6)",
+          "lower": "Lower Secondary (7–9)",
+          "upper": "Upper Secondary (10–12)",
+          "alevel": "A-Level / Pre-University"
+        },
+        "default_value": "upper",
+        "allow_null": 0,
+        "multiple": 0,
+        "ui": 0,
+        "return_format": "value",
+        "ajax": 0,
+        "placeholder": ""
+      },
+      {
+        "key": "field_67d4c8f1e2f3a",
+        "label": "Format",
+        "name": "format",
+        "aria-label": "",
+        "type": "text",
+        "instructions": "e.g. Online via Zoom, In-Person, Hybrid",
+        "required": 0,
+        "default_value": "Online via Zoom",
+        "placeholder": ""
+      },
+      {
+        "key": "field_67d4c8f1f2a3b",
+        "label": "Tutor Name",
+        "name": "tutor_name",
+        "aria-label": "",
+        "type": "text",
+        "instructions": "Name of the tutor teaching this course",
+        "required": 0,
+        "default_value": "Expert Tutor",
+        "placeholder": ""
+      },
+      {
+        "key": "field_67d4c8f1a2b4c",
+        "label": "Rating",
+        "name": "rating",
+        "aria-label": "",
+        "type": "text",
+        "instructions": "e.g. ★★★★★",
+        "required": 0,
+        "default_value": "★★★★★",
+        "placeholder": ""
+      },
+      {
+        "key": "field_67d4c8f1b2c4d",
+        "label": "Tag",
+        "name": "tag",
+        "aria-label": "",
+        "type": "text",
+        "instructions": "e.g. Course, Program, Workshop",
+        "required": 0,
+        "default_value": "Course",
+        "placeholder": ""
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "course"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_67d4c8f2a3b4c",
+    "title": "Tutor Details",
+    "fields": [
+      {
+        "key": "field_67d4c8f2b3c4d",
+        "label": "Subject",
+        "name": "subject",
+        "aria-label": "",
+        "type": "text",
+        "instructions": "e.g. Advanced Mathematics & Statistics",
+        "required": 0,
+        "default_value": "Specialized Subject",
+        "placeholder": ""
+      },
+      {
+        "key": "field_67d4c8f2c3d4e",
+        "label": "Badges",
+        "name": "badges",
+        "aria-label": "",
+        "type": "text",
+        "instructions": "Comma-separated: e.g. A-Level,O-Level Math,ECAT",
+        "required": 0,
+        "default_value": "A-Level,O-Level,Expert",
+        "placeholder": ""
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "tutor_profile"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 1
+  }
+]
