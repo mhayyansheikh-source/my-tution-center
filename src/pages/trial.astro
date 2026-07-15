@@ -1,5 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCourses } from '../lib/api';
+
+const allCourses = await getCourses();
+const subjectSet = new Set();
+allCourses.forEach(c => {
+  const tag = c?.meta?.subject_tag;
+  if (tag) subjectSet.add(tag);
+});
+const subjects = [...subjectSet].sort();
+const hasSubjects = subjects.length > 0;
+const fallbackOptions = ['Mathematics (O/A Level)', 'Physics', 'Chemistry', 'Biology', 'English Language & Literature', 'Urdu', 'Computer Science / IT', 'Economics', 'General Study Skills'];
 ---
 
 <Layout title="Book a Free Trial - My Tuition Center">
@@ -61,10 +72,11 @@ import Layout from '../layouts/Layout.astro';
                   <label>Subject / Grade Level <span style="color:#aa2d00;">*</span></label>
                   <select class="form-control" required>
                     <option value="">Select a subject…</option>
-                    <optgroup label="Sciences"><option>Mathematics (O/A Level)</option><option>Physics</option><option>Chemistry</option><option>Biology</option></optgroup>
-                    <optgroup label="Languages"><option>English Language & Literature</option><option>Urdu</option></optgroup>
-                    <optgroup label="Computer Science"><option>Computer Science / IT</option></optgroup>
-                    <optgroup label="Other"><option>Economics</option><option>General Study Skills</option></optgroup>
+                    {hasSubjects ? (
+                      subjects.map(s => <option>{s}</option>)
+                    ) : (
+                      fallbackOptions.map(o => <option>{o}</option>)
+                    )}
                   </select>
                 </div>
                 <div class="form-group">

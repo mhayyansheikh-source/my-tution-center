@@ -1,5 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import TutorCard from '../components/TutorCard.astro';
+import { getTutors } from '../lib/api';
+
+const tutors = await getTutors();
+const featuredTutors = tutors.slice(0, 3);
 ---
 
 <Layout title="About Us - My Tuition Center">
@@ -66,6 +71,23 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
     </section>
+
+    {featuredTutors.length > 0 && (
+    <section class="section-pad" style="padding-top:0">
+      <div class="container">
+        <div class="section-header centered">
+          <h2 class="display-md">Meet Our Expert Tutors</h2>
+          <p>Learn from the best educators in Karachi with years of experience and proven track records.</p>
+        </div>
+        <div class="tutor-cards" style="justify-content:center">
+          {featuredTutors.map(tutor => <TutorCard tutor={tutor} />)}
+        </div>
+        <div style="text-align:center;margin-top:var(--sp-xxl)">
+          <a href="/tutors" class="btn btn-secondary">View All Tutors →</a>
+        </div>
+      </div>
+    </section>
+    )}
 
     <section style="padding:0 0 var(--sp-section)">
       <div class="container">

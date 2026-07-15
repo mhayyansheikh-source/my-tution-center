@@ -16,6 +16,11 @@ export async function getCourses() {
   return await fetchAPI('course?_embed');
 }
 
+export async function getCourseBySlug(slug) {
+  const courses = await fetchAPI(`course?slug=${slug}&_embed`);
+  return courses?.[0] || null;
+}
+
 export async function getTutors() {
   return await fetchAPI('tutor_profile?_embed');
 }

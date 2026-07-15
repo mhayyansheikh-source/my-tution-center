@@ -97,18 +97,44 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
-  // Hydrate fields from query parameters on client side
   const params = new URLSearchParams(window.location.search);
-  const title = params.get('course') || 'Selected Course';
-  const price = params.get('price') || 'PKR 0';
-  const tutor = params.get('tutor') || 'Expert Tutor';
-  const format = params.get('format') || 'Online';
+  const slug = params.get('slug');
 
-  document.getElementById('enroll-course-title').textContent = title;
-  document.getElementById('enroll-summary-title').textContent = title;
-  document.getElementById('enroll-summary-tutor').textContent = tutor;
-  document.getElementById('enroll-summary-format').textContent = format;
-  document.getElementById('enroll-course-price').textContent = price;
+  async function populateFromAPI(slug) {
+    const API_URL = import.meta.env.PUBLIC_WP_API_URL;
+    try {
+      const res = await fetch(`${API_URL}/wp/v2/course?slug=${slug}&_embed`);
+      const courses = await res.json();
+      if (courses.length === 0) return false;
+      const course = courses[0];
+      const title = course?.title?.rendered || 'Selected Course';
+      const price = course?.meta?.price || 'PKR 0';
+      const tutor = course?._embedded?.author?.[0]?.name || course?.meta?.tutor_name || 'Expert Tutor';
+      const format = course?.meta?.format || 'Online';
+      document.getElementById('enroll-course-title').textContent = title;
+      document.getElementById('enroll-summary-title').textContent = title;
+      document.getElementById('enroll-summary-tutor').textContent = tutor;
+      document.getElementById('enroll-summary-format').textContent = format;
+      document.getElementById('enroll-course-price').textContent = price;
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  if (slug) {
+    populateFromAPI(slug);
+  } else {
+    const title = params.get('course') || 'Selected Course';
+    const price = params.get('price') || 'PKR 0';
+    const tutor = params.get('tutor') || 'Expert Tutor';
+    const format = params.get('format') || 'Online';
+    document.getElementById('enroll-course-title').textContent = title;
+    document.getElementById('enroll-summary-title').textContent = title;
+    document.getElementById('enroll-summary-tutor').textContent = tutor;
+    document.getElementById('enroll-summary-format').textContent = format;
+    document.getElementById('enroll-course-price').textContent = price;
+  }
 
   const enrollForm = document.getElementById('enroll-form');
   if (enrollForm) {

@@ -1,5 +1,22 @@
 ---
-// Footer Component
+import { getCourses } from '../lib/api';
+
+const allCourses = await getCourses();
+const subjectSet = new Set();
+allCourses.forEach(c => {
+  const tag = c?.meta?.subject_tag;
+  if (tag) subjectSet.add(tag);
+});
+const subjects = [...subjectSet].sort();
+const hasSubjects = subjects.length > 0;
+// Static fallback if API is unavailable
+const fallbackSubjects = [
+  { label: 'Mathematics', slug: 'math' },
+  { label: 'Sciences', slug: 'science' },
+  { label: 'English', slug: 'english' },
+  { label: 'Computing', slug: 'prog' },
+  { label: 'Humanities', slug: 'history' },
+];
 ---
 <footer id="site-footer">
   <div class="container">
@@ -21,11 +38,15 @@
       <div class="footer-col">
         <h2>COURSES</h2>
         <ul>
-          <li><a href="/courses?category=math">Mathematics</a></li>
-          <li><a href="/courses?category=science">Sciences</a></li>
-          <li><a href="/courses?category=english">English</a></li>
-          <li><a href="/courses?category=prog">Computing</a></li>
-          <li><a href="/courses?category=history">Humanities</a></li>
+          {hasSubjects ? (
+            subjects.map(s => (
+              <li><a href={`/courses?category=${s.toLowerCase()}`}>{s}</a></li>
+            ))
+          ) : (
+            fallbackSubjects.map(s => (
+              <li><a href={`/courses?category=${s.slug}`}>{s.label}</a></li>
+            ))
+          )}
           <li><a href="/courses">View All Courses</a></li>
         </ul>
       </div>
