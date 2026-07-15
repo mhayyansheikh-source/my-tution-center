@@ -102,6 +102,7 @@ import Layout from '../layouts/Layout.astro';
 
   async function populateFromAPI(slug) {
     const API_URL = import.meta.env.PUBLIC_WP_API_URL;
+    if (!API_URL) return false;
     try {
       const res = await fetch(`${API_URL}/wp/v2/course?slug=${slug}&_embed`);
       const courses = await res.json();
