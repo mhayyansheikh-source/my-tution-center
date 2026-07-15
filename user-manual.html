@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Tuition Center — User Manual</title>
+<style>
+  @page { margin: 2cm; @top-center { content: "My Tuition Center — User Manual"; font-size: 9px; color: #666; } @bottom-center { content: "Page " counter(page); font-size: 9px; color: #666; } }
+  * { box-sizing: border-box; }
+  body { font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; color: #1a1a2e; line-height: 1.6; font-size: 11pt; max-width: 1000px; margin: 0 auto; padding: 20px; }
+  h1 { font-size: 26pt; color: #1a1a2e; border-bottom: 3px solid #e94560; padding-bottom: 10px; margin-top: 0; }
+  h2 { font-size: 18pt; color: #0f3460; border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-top: 40px; }
+  h3 { font-size: 14pt; color: #16213e; margin-top: 25px; }
+  h4 { font-size: 12pt; color: #e94560; margin-top: 15px; }
+  p, li { font-size: 11pt; color: #333; }
+  ul, ol { padding-left: 22px; }
+  li { margin-bottom: 4px; }
+  code { background: #f4f4f8; padding: 1px 5px; border-radius: 3px; font-size: 10pt; }
+  .cover { text-align: center; padding: 80px 0 60px; page-break-after: always; }
+  .cover h1 { font-size: 32pt; border: none; }
+  .cover .subtitle { font-size: 16pt; color: #666; margin: 20px 0; }
+  .cover .meta { font-size: 11pt; color: #999; }
+  .toc { page-break-after: always; }
+  .toc ul { list-style: none; padding: 0; }
+  .toc li { padding: 6px 0; border-bottom: 1px dotted #ddd; }
+  .toc a { text-decoration: none; color: #0f3460; }
+  .toc a:hover { text-decoration: underline; }
+  .page-break { page-break-before: always; }
+  table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 10pt; }
+  th, td { border: 1px solid #ddd; padding: 8px 10px; text-align: left; }
+  th { background: #0f3460; color: #fff; }
+  tr:nth-child(even) { background: #f9f9f9; }
+  .note { background: #fffbe6; border-left: 4px solid #f0c040; padding: 12px 15px; margin: 15px 0; border-radius: 0 4px 4px 0; }
+  .tip { background: #e8f5e9; border-left: 4px solid #43a047; padding: 12px 15px; margin: 15px 0; border-radius: 0 4px 4px 0; }
+  .warn { background: #fce4ec; border-left: 4px solid #e53935; padding: 12px 15px; margin: 15px 0; border-radius: 0 4px 4px 0; }
+  img { max-width: 100%; border: 1px solid #ddd; border-radius: 4px; margin: 10px 0; }
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <h1>My Tuition Center</h1>
+  <div class="subtitle">Complete User Manual</div>
+  <p style="font-size:14pt;color:#0f3460">Admin · Tutor · Student · Client Website</p>
+  <div class="meta">Version 1.0 &mdash; July 2026</div>
+  <div style="margin-top:60px; font-size:10pt; color:#999;">
+    <p>My Tuition Center<br>Sana Square, Nishtar Road, Garden West, Karachi 75540</p>
+    <p>mytuitioncenter.pk &bull; cms.mytuitioncenter.pk</p>
+  </div>
+</div>
+
+<!-- ============ TABLE OF CONTENTS ============ -->
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ul>
+    <li><a href="#s1">1. System Overview</a></li>
+    <li><a href="#s2">2. Client Website (mytuitioncenter.pk)</a></li>
+    <li><a href="#s3">3. WordPress Admin (cms.mytuitioncenter.pk)</a></li>
+    <li><a href="#s4">4. Admin Dashboard</a></li>
+    <li><a href="#s5">5. Tutor Dashboard &amp; Portal</a></li>
+    <li><a href="#s6">6. Student Dashboard</a></li>
+    <li><a href="#s7">7. Financial Escrow System</a></li>
+    <li><a href="#s8">8. Authentication &amp; Security</a></li>
+    <li><a href="#s9">9. Auto-Deploy &amp; Content Publishing</a></li>
+    <li><a href="#s10">10. Troubleshooting</a></li>
+  </ul>
+</div>
+
+<!-- ============ 1. SYSTEM OVERVIEW ============ -->
+<h2 id="s1" class="page-break">1. System Overview</h2>
+<p>My Tuition Center is a headless LMS (Learning Management System) consisting of two main parts:</p>
+
+<table>
+  <tr><th>Component</th><th>URL</th><th>Purpose</th></tr>
+  <tr><td><strong>Client Website</strong></td><td><code>mytuitioncenter.pk</code></td><td>Public-facing site built with Astro. Shows courses, tutors, about, contact, enrollment forms. Hosted on Vercel.</td></tr>
+  <tr><td><strong>WordPress Backend</strong></td><td><code>cms.mytuitioncenter.pk</code></td><td>Content management system. Admins manage courses, tutors, enrollments, classes. Hosted on your web server.</td></tr>
+</table>
+
+<h3>How they work together</h3>
+<ol>
+  <li><strong>Admin adds content</strong> in WordPress (courses, tutors, classes)</li>
+  <li><strong>Auto-Deploy triggers</strong> &mdash; Vercel rebuilds the client website automatically</li>
+  <li><strong>Client website updates</strong> &mdash; courses and tutors appear live on <code>mytuitioncenter.pk</code></li>
+</ol>
+
+<div class="tip">
+  <strong>Key benefit:</strong> Edit content in WordPress, and it automatically goes live on the public website within 1&ndash;2 minutes. No manual deployment needed.
+</div>
+
+<h3>User Roles</h3>
+<table>
+  <tr><th>Role</th><th>Access</th><th>Dashboard</th></tr>
+  <tr><td><strong>Administrator</strong></td><td>WordPress admin + Admin Dashboard</td><td><code>cms.mytuitioncenter.pk/admin-dashboard</code></td></tr>
+  <tr><td><strong>Tutor</strong></td><td>Tutor Portal</td><td><code>cms.mytuitioncenter.pk/tutors</code> (when logged in)</td></tr>
+  <tr><td><strong>Student</strong></td><td>Student Dashboard</td><td><code>cms.mytuitioncenter.pk/dashboard</code></td></tr>
+  <tr><td><strong>Visitor</strong></td><td>Public website only</td><td><code>mytuitioncenter.pk</code></td></tr>
+</table>
+
+<!-- ============ 2. CLIENT WEBSITE ============ -->
+<h2 id="s2" class="page-break">2. Client Website (mytuitioncenter.pk)</h2>
+<p>The public-facing website is where visitors browse courses, meet tutors, and enroll. No login required.</p>
+
+<h3>Pages &amp; Features</h3>
+<table>
+  <tr><th>Page</th><th>URL</th><th>Description</th></tr>
+  <tr><td>Home</td><td><code>/</code></td><td>Hero section, featured courses, stats, testimonials, CTA</td></tr>
+  <tr><td>Courses</td><td><code>/courses</code></td><td>Browse all courses with subject/grade filters</td></tr>
+  <tr><td>Course Detail</td><td><code>/courses/:slug</code></td><td>Full course info, price, tutor, enroll button</td></tr>
+  <tr><td>Tutors</td><td><code>/tutors</code></td><td>Browse all tutors</td></tr>
+  <tr><td>Tutor Profile</td><td><code>/tutors/:slug</code></td><td>Tutor bio, subjects, badges, book trial</td></tr>
+  <tr><td>About</td><td><code>/about</code></td><td>Mission, values, featured tutors, stats</td></tr>
+  <tr><td>Contact</td><td><code>/contact</code></td><td>Contact form, address, phone, hours</td></tr>
+  <tr><td>Enroll</td><td><code>/enroll</code></td><td>Enrollment form with payment receipt upload</td></tr>
+  <tr><td>Book Trial</td><td><code>/trial</code></td><td>Free trial class booking form</td></tr>
+  <tr><td>Student Login</td><td><code>/auth</code></td><td>Sign in / sign up for students</td></tr>
+  <tr><td>Help Center</td><td><code>/help</code></td><td>FAQ and support information</td></tr>
+  <tr><td>Privacy / Terms</td><td><code>/privacy</code>, <code>/terms</code></td><td>Legal pages</td></tr>
+  <tr><td>Admin Login</td><td><code>/admin</code></td><td>Redirects to WordPress admin login</td></tr>
+</table>
+
+<h3>Content Display Rules</h3>
+<p>Courses and tutors displayed on the website are fetched from the WordPress API during build time. If the API is unavailable, the site falls back to hardcoded placeholder content so the pages never break.</p>
+
+<div class="note">
+  <strong>Note:</strong> After adding/editing courses or tutors in WordPress, the client website updates automatically within 1&ndash;2 minutes thanks to the Auto-Deploy system (see Section 9).
+</div>
+
+<!-- ============ 3. WORDPRESS ADMIN ============ -->
+<h2 id="s3" class="page-break">3. WordPress Admin Backend (cms.mytuitioncenter.pk)</h2>
+<p>This is where administrators manage all content. Access via <code>cms.mytuitioncenter.pk/wp-admin</code>.</p>
+
+<h3>3.1 Managing Courses</h3>
+<ol>
+  <li>Go to <strong>Courses → Add New</strong> (or edit an existing course)</li>
+  <li>Enter <strong>Title</strong> &mdash; e.g. "Cambridge O-Level Mathematics (Syllabus D)"</li>
+  <li>Write <strong>Description</strong> in the editor (full course details)</li>
+  <li>Set <strong>Featured Image</strong> &mdash; this shows as the course card image on the website</li>
+  <li>Fill in the <strong>Course Details</strong> meta box (below the editor):
+    <ul>
+      <li><strong>Price</strong> &mdash; e.g. "PKR 15,000/mo"</li>
+      <li><strong>Subject Tag</strong> &mdash; e.g. "Mathematics" (used for filtering)</li>
+      <li><strong>Grade Level</strong> &mdash; Primary, Lower Secondary, Upper Secondary, or A-Level</li>
+      <li><strong>Format</strong> &mdash; "Online via Zoom", "In-Person", "Hybrid"</li>
+      <li><strong>Tutor Name</strong> &mdash; the tutor teaching this course</li>
+      <li><strong>Rating</strong> &mdash; e.g. "★★★★★" (stars)</li>
+      <li><strong>Tag</strong> &mdash; e.g. "Course", "Program", "Workshop"</li>
+    </ul>
+  </li>
+  <li>Click <strong>Publish</strong></li>
+</ol>
+
+<div class="tip">
+  <strong>Tip:</strong> The Subject Tag field controls which category the course appears under on the website (Mathematics, Physics, English, etc.). Use consistent names across courses.
+</div>
+
+<h3>3.2 Managing Tutors</h3>
+<ol>
+  <li>Go to <strong>Tutors → Add New</strong></li>
+  <li>Enter <strong>Title</strong> &mdash; the tutor's full name</li>
+  <li>Write <strong>Bio</strong> in the editor</li>
+  <li>Set <strong>Featured Image</strong> &mdash; profile photo</li>
+  <li>Fill in the <strong>Tutor Details</strong> meta box:
+    <ul>
+      <li><strong>Subject</strong> &mdash; e.g. "Advanced Mathematics & Statistics"</li>
+      <li><strong>Badges</strong> &mdash; comma-separated list, e.g. "A-Level,O-Level Math,ECAT"</li>
+    </ul>
+  </li>
+  <li>Click <strong>Publish</strong></li>
+</ol>
+
+<h3>3.3 Managing Enrollments</h3>
+<ol>
+  <li>Go to <strong>Enrollments</strong> in the admin menu</li>
+  <li>View all enrollment requests submitted by students</li>
+  <li>Edit enrollment to <strong>Publish</strong> it when payment is verified &mdash; this approves the enrollment</li>
+  <li>When published, the student gains access to course materials in their dashboard</li>
+</ol>
+
+<h3>3.4 Managing Classes (Recorded &amp; Live)</h3>
+<ol>
+  <li>Go to <strong>Recorded Classes</strong> or <strong>Live Classes</strong></li>
+  <li>Add Title, set the <strong>Course</strong> (via custom field), and provide the video URL</li>
+  <li>For recorded classes: add the <strong>YouTube ID</strong> in the custom field</li>
+  <li>For live classes: add the <strong>Live Session URL</strong> in the custom field</li>
+  <li>Publish &mdash; students enrolled in the associated course will see it in their dashboard</li>
+</ol>
+
+<h3>3.5 Managing Tutor Applications</h3>
+<p>When a tutor applies via the website (with 10K PKR receipt upload):</p>
+<ol>
+  <li>A <strong>Tutor Application</strong> post is created as draft</li>
+  <li>A user account with <strong>Pending Tutor</strong> role is created</li>
+  <li>Go to <strong>Users</strong> and change the role to <strong>Tutor</strong> to approve</li>
+  <li>The tutor receives an email with login credentials and is redirected to their portal</li>
+</ol>
+
+<!-- ============ 4. ADMIN DASHBOARD ============ -->
+<h2 id="s4" class="page-break">4. Admin Dashboard</h2>
+<p>Access at <code>cms.mytuitioncenter.pk/admin-dashboard</code> &mdash; requires Administrator login.</p>
+
+<h3>Features</h3>
+<table>
+  <tr><th>Metric</th><th>Description</th></tr>
+  <tr><td>Total Revenue (MRR)</td><td>Sum of all course prices from approved enrollments</td></tr>
+  <tr><td>Active Students</td><td>Number of registered student accounts</td></tr>
+  <tr><td>Active Tutors</td><td>Number of approved tutor accounts</td></tr>
+  <tr><td>Total Enrollments</td><td>Total approved (published) enrollments</td></tr>
+  <tr><td>Recent Activity Timeline</td><td>Latest 5 activities (new enrollments, class submissions) with timestamps</td></tr>
+</table>
+
+<h3>Financial Escrow Dashboard</h3>
+<p>Access at WordPress Admin → Enrollments → <strong>Financial Escrow</strong></p>
+<table>
+  <tr><th>Column</th><th>Details</th></tr>
+  <tr><td>Course / Student</td><td>Enrollment details</td></tr>
+  <tr><td>Amount Paid</td><td>Full course fee</td></tr>
+  <tr><td>Tutor Share (75%)</td><td>Amount due to the tutor</td></tr>
+  <tr><td>Platform Fee (25%)</td><td>Platform commission</td></tr>
+  <tr><td>Release Date</td><td>Date when funds become releasable</td></tr>
+  <tr><td>Actions</td><td>"Release Funds" button to pay out tutor</td></tr>
+</table>
+
+<div class="warn">
+  <strong>Important:</strong> Funds are held in escrow for 30 days. Only release after verifying the student hasn't requested a refund.
+</div>
+
+<!-- ============ 5. TUTOR DASHBOARD ============ -->
+<h2 id="s5" class="page-break">5. Tutor Dashboard &amp; Portal</h2>
+<p>Access at <code>cms.mytuitioncenter.pk/tutors</code> &mdash; requires logging in with a Tutor account.</p>
+
+<h3>Tutor Dashboard Features</h3>
+<table>
+  <tr><th>Section</th><th>Description</th></tr>
+  <tr><td>Stats Overview</td><td>Total courses assigned, classes submitted, pending payout amount</td></tr>
+  <tr><td>Timeline &amp; Payouts</td><td>Table showing course, end date, payout due date, and release status</td></tr>
+  <tr><td>Submit a Class</td><td>Form to submit recorded (YouTube) or live class, linked to a course</td></tr>
+  <tr><td>Submission History</td><td>Last 5 submissions with status</td></tr>
+  <tr><td>Account Settings</td><td>Freeze/unfreeze account or permanently delete account</td></tr>
+</table>
+
+<h3>How to Submit a Class</h3>
+<ol>
+  <li>Log in to your tutor account at <code>cms.mytuitioncenter.pk/tutors</code></li>
+  <li>Scroll to the <strong>Submit a Class</strong> section</li>
+  <li>Select the <strong>Course</strong> from the dropdown</li>
+  <li>Choose <strong>Class Type</strong> (Recorded Video or Live Session)</li>
+  <li>Enter <strong>Class Title</strong> and <strong>YouTube ID</strong> (for recorded) or <strong>Session URL</strong> (for live)</li>
+  <li>Click Submit &mdash; class is saved and appears in student dashboards</li>
+</ol>
+
+<h3>Tutor Application (New Tutors)</h3>
+<ol>
+  <li>Go to <code>cms.mytuitioncenter.pk/tutors</code> and scroll to the application form</li>
+  <li>Fill in your details (name, email, phone, subjects)</li>
+  <li>Upload the <strong>10,000 PKR application fee receipt</strong></li>
+  <li>Submit &mdash; your application is sent to the admin for review</li>
+  <li>Once approved, you'll receive an email with login credentials</li>
+</ol>
+
+<!-- ============ 6. STUDENT DASHBOARD ============ -->
+<h2 id="s6" class="page-break">6. Student Dashboard</h2>
+<p>Access at <code>cms.mytuitioncenter.pk/dashboard</code> &mdash; requires logging in with a Student account.</p>
+
+<h3>Student Dashboard Features</h3>
+<table>
+  <tr><th>Section</th><th>Description</th></tr>
+  <tr><td>Stats Overview</td><td>Courses enrolled, classes completed, average score</td></tr>
+  <tr><td>Learning Progress</td><td>Overall completion percentage with progress bar</td></tr>
+  <tr><td>Recorded Classes</td><td>List of recorded classes with YouTube embeds and "Mark as Complete" checkboxes</td></tr>
+  <tr><td>Live Sessions</td><td>Upcoming live sessions with "Join Live" button (via secure proxy)</td></tr>
+  <tr><td>My Enrollments</td><td>Course enrollments with refund option (within 30 days and &lt;25% completion)</td></tr>
+  <tr><td>Account Settings</td><td>Freeze/unfreeze account or permanently delete account</td></tr>
+</table>
+
+<h3>How to Access Course Content</h3>
+<ol>
+  <li>Log in at <code>cms.mytuitioncenter.pk/auth</code> with your student credentials</li>
+  <li>You'll be redirected to your <strong>Student Dashboard</strong></li>
+  <li>View your enrolled courses under <strong>My Enrollments</strong></li>
+  <li>Watch recorded classes and mark them complete to track progress</li>
+  <li>Join live sessions at scheduled times via the <strong>Join Live</strong> button</li>
+</ol>
+
+<h3>How to Request a Refund</h3>
+<ol>
+  <li>Go to <strong>My Enrollments</strong> on the dashboard</li>
+  <li>If eligible (within 30 days and less than 25% complete), click <strong>Request Refund</strong></li>
+  <li>Confirm the action &mdash; your enrollment will be cancelled and refund processed</li>
+</ol>
+
+<div class="warn">
+  <strong>Note:</strong> Refunds are only available within 30 days of enrollment and if you've completed less than 25% of the course.
+</div>
+
+<h3>Account Freeze</h3>
+<p>Freezing your account pauses your courses so you don't lose paid time. To unfreeze, simply click the button again.</p>
+
+<!-- ============ 7. FINANCIAL ESCROW ============ -->
+<h2 id="s7" class="page-break">7. Financial Escrow System</h2>
+<p>The escrow system ensures fair payments for both tutors and the platform.</p>
+
+<h3>How It Works</h3>
+<ol>
+  <li><strong>Student enrolls</strong> in a course and submits payment receipt</li>
+  <li><strong>Admin approves</strong> enrollment (changes status to Published)</li>
+  <li><strong>Funds held in escrow</strong> &mdash; 75% reserved for tutor, 25% platform fee</li>
+  <li><strong>30-day waiting period</strong> &mdash; student can request a refund during this time</li>
+  <li><strong>Release funds</strong> &mdash; admin releases payout to tutor after 30 days (or manually via Escrow Dashboard)</li>
+</ol>
+
+<h3>Access the Escrow Dashboard</h3>
+<p>WordPress Admin → Enrollments → <strong>Financial Escrow</strong> (submenu)</p>
+
+<table>
+  <tr><th>Column</th><th>Details</th></tr>
+  <tr><td>Course</td><td>Course title and enrolled student</td></tr>
+  <tr><td>Amount Paid</td><td>Total fee paid by student</td></tr>
+  <tr><td>Tutor Share (75%)</td><td>Amount for the tutor</td></tr>
+  <tr><td>Platform Fee (25%)</td><td>Platform commission</td></tr>
+  <tr><td>Release Date</td><td>Date funds become eligible for release</td></tr>
+  <tr><td>Status</td><td>"DUE" if past release date, or date countdown</td></tr>
+  <tr><td>Action</td><td>"Release Funds" button to process tutor payment</td></tr>
+</table>
+
+<!-- ============ 8. AUTHENTICATION ============ -->
+<h2 id="s8" class="page-break">8. Authentication &amp; Security</h2>
+
+<h3>Login Methods</h3>
+<table>
+  <tr><th>User Type</th><th>Login URL</th><th>Method</th></tr>
+  <tr><td>Administrator</td><td><code>cms.mytuitioncenter.pk/admin</code></td><td>Username &amp; password → redirected to Admin Dashboard</td></tr>
+  <tr><td>Tutor</td><td><code>cms.mytuitioncenter.pk/tutors</code></td><td>Magic link or credentials → redirected to Tutor Portal</td></tr>
+  <tr><td>Student</td><td><code>cms.mytuitioncenter.pk/auth</code></td><td>Magic link or credentials → redirected to Student Dashboard</td></tr>
+</table>
+
+<h3>Magic Link Login</h3>
+<p>Users can log in without a password by requesting a magic link sent to their email. Click the link in the email to be automatically logged in and redirected to the correct dashboard.</p>
+
+<h3>Device Verification</h3>
+<p>Student accounts are locked to a specific device. If a login is detected from an unrecognised device, the session is blocked and the user is logged out for security.</p>
+
+<h3>Account Freeze</h3>
+<p>Both students and tutors can freeze their accounts. Frozen accounts cannot access course content, and the freeze pauses any active time-based commitments.</p>
+
+<!-- ============ 9. AUTO-DEPLOY ============ -->
+<h2 id="s9" class="page-break">9. Auto-Deploy &amp; Content Publishing</h2>
+
+<h3>How Content Goes Live</h3>
+<ol>
+  <li><strong>Edit content</strong> in WordPress (add/update/delete courses, tutors)</li>
+  <li><strong>Auto-Deploy triggers</strong> &mdash; the Vercel Deploy Hook fires automatically</li>
+  <li><strong>Vercel rebuilds</strong> the client website (takes ~1&ndash;2 minutes)</li>
+  <li><strong>Site updates</strong> &mdash; changes appear live on <code>mytuitioncenter.pk</code></li>
+</ol>
+
+<h3>Setting Up Auto-Deploy</h3>
+<ol>
+  <li>In Vercel Dashboard → Settings → Git → <strong>Deploy Hooks</strong>, create a hook named "WordPress CMS"</li>
+  <li>Copy the generated URL</li>
+  <li>In WordPress → Settings → <strong>Auto Deploy</strong>, paste the URL and save</li>
+</ol>
+
+<div class="tip">
+  <strong>Tip:</strong> Auto-Deploy triggers for ALL changes to courses and tutors (add, update, delete, trash). No manual redeployment needed.
+</div>
+
+<!-- ============ 10. TROUBLESHOOTING ============ -->
+<h2 id="s10" class="page-break">10. Troubleshooting</h2>
+
+<h3>Courses not showing on the website</h3>
+<table>
+  <tr><th>Issue</th><th>Solution</th></tr>
+  <tr><td>No courses in API</td><td>Check <code>cms.mytuitioncenter.pk/wp-json/wp/v2/course</code> &mdash; should return JSON</td></tr>
+  <tr><td>REST API blocked (403)</td><td>Go to Settings → Permalinks → save as "Post name". Check security plugins.</td></tr>
+  <tr><td>Website not updated</td><td>Auto-Deploy may not have run yet. Wait 2 minutes or manually redeploy on Vercel.</td></tr>
+  <tr><td>Wrong API URL</td><td>Verify <code>PUBLIC_WP_API_URL</code> is set correctly in Vercel environment variables</td></tr>
+  <tr><td>Meta fields empty</td><td>Edit the course in WordPress and fill in the Course Details meta box fields</td></tr>
+</table>
+
+<h3>Login not working</h3>
+<table>
+  <tr><th>Issue</th><th>Solution</th></tr>
+  <tr><td>Wrong credentials</td><td>Use the "Lost your password?" link on the login page</td></tr>
+  <tr><td>Magic link not received</td><td>Check spam folder. Try again after 60 seconds.</td></tr>
+  <tr><td>"Device mismatch" error</td><td>Your account is locked to another device. Contact admin to reset device lock.</td></tr>
+  <tr><td>Account frozen</td><td>Log in and unfreeze your account from the dashboard settings.</td></tr>
+</table>
+
+<h3>Enrollment / Payment Issues</h3>
+<table>
+  <tr><th>Issue</th><th>Solution</th></tr>
+  <tr><td>Enrollment pending</td><td>Admin needs to verify payment receipt and publish the enrollment</td></tr>
+  <tr><td>Receipt upload fails</td><td>Ensure file is JPEG, PNG, or PDF under 5MB</td></tr>
+  <tr><td>Refund not available</td><td>Past 30 days or more than 25% course completed</td></tr>
+</table>
+
+<h3>Class Access Issues</h3>
+<table>
+  <tr><th>Issue</th><th>Solution</th></tr>
+  <tr><td>Video not playing</td><td>Check that the YouTube ID is correct in the class settings</td></tr>
+  <tr><td>"Join Live" not working</td><td>Contact the tutor to ensure the session URL is properly configured</td></tr>
+  <tr><td>Classes not appearing</td><td>Only enrolled students can see classes for their enrolled courses</td></tr>
+</table>
+
+<h3>Technical Support</h3>
+<p>For any issues not covered above:</p>
+<ul>
+  <li>Email: <code>mutuitioncenter01@gmail.com</code></li>
+  <li>Phone: <code>+92 370 3438352</code></li>
+  <li>Visit: Sana Square, Nishtar Road, Garden West, Karachi 75540</li>
+</ul>
+
+<hr style="margin-top:60px">
+<p style="text-align:center;font-size:10pt;color:#999">&copy; 2026 My Tuition Center. All rights reserved.</p>
+
+</body>
+</html>
