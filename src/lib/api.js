@@ -1,5 +1,8 @@
-const WP_BASE = import.meta.env.PUBLIC_WP_API_URL;
-const WP_API_URL = WP_BASE ? `${WP_BASE}/wp/v2` : null;
+const RAW_URL = import.meta.env.PUBLIC_WP_API_URL;
+// Strip trailing slashes and optional /wp-json suffix so we always end with /wp-json/wp/v2
+const WP_API_URL = RAW_URL
+  ? `${RAW_URL.replace(/\/+$/, '').replace(/\/wp-json$/, '')}/wp-json/wp/v2`
+  : null;
 
 export async function fetchAPI(endpoint) {
   if (!WP_API_URL) {
