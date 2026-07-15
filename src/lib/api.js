@@ -1,4 +1,4 @@
-const WP_API_URL = 'https://api.mytuitioncenter.pk/wp-json/wp/v2'; // Pointing to production live WordPress domain
+const WP_API_URL = `${import.meta.env.PUBLIC_WP_API_URL}/wp/v2`;
 
 export async function fetchAPI(endpoint) {
   const res = await fetch(`${WP_API_URL}/${endpoint}`);

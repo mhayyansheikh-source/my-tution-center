@@ -91,7 +91,7 @@ import Layout from '../layouts/Layout.astro';
       e.preventDefault();
       const formElement = e.target as HTMLFormElement;
       const formData = new FormData(formElement);
-      const API_URL = 'https://api.mytuitioncenter.pk/wp-json';
+      const API_URL = import.meta.env.PUBLIC_WP_API_URL;
       
       try {
         // ID 1 is standard for WP Contact Form 7

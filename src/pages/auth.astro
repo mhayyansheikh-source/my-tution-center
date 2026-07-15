@@ -118,7 +118,7 @@ import Layout from '../layouts/Layout.astro';
       const pass = (document.getElementById('signin-password') as HTMLInputElement).value;
       
       try {
-        const res = await fetch('https://api.mytuitioncenter.pk/wp-json/jwt-auth/v1/token', {
+        const res = await fetch(`${import.meta.env.PUBLIC_WP_API_URL}/jwt-auth/v1/token`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username: email, password: pass })
